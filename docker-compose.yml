@@ -4,7 +4,7 @@ services:
     depends_on:
       - node-slave1
       - node-slave2
-    image: cluster-base:latest
+    build: .
     container_name: node-master
     hostname: node-master
     tty: true
@@ -15,34 +15,24 @@ services:
       - "8080:8080"
       - "8042:8042"
       - "8888:8888"
-    networks:
-      cluster-network:
-        aliases: 
-          - node-master
+      - "4040:4040"
+      - "2222:22"
+    volumes:
+      - ./pyspark:/root/lab/pyspark
+    
   node-slave1:
-    image: cluster-base:latest
+    build: .
     container_name: node-slave1
     hostname: node-slave1
     tty: true
     ports:
       - "7042:8042"
-    networks:
-      cluster-network:
-        aliases: 
-          - node-slave1
+    
   node-slave2:
-    image: cluster-base:latest
+    build: .
     container_name: node-slave2
     hostname: node-slave2
     tty: true
     ports:
       - "9042:8042"
-    networks:
-      cluster-network:
-        aliases: 
-          - node-slave2
-networks:
-  cluster-network:
-    driver: bridge
-    ipam:
-      driver: default
+    
