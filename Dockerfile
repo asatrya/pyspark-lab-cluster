@@ -8,6 +8,8 @@ ENV PATH="${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${SPARK_HOME}/bin:${SPARK_HOME}
 ENV HADOOP_VERSION 2.7.0
 ENV PYSPARK_PYTHON=python3
 
+RUN echo "export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop" >> ~/.bashrc
+
 RUN apt-get update && \
     apt-get install -y wget nano openjdk-8-jdk ssh openssh-server
 RUN apt update && apt install -y python3 python3-pip python3-dev build-essential libssl-dev libffi-dev libpq-dev
