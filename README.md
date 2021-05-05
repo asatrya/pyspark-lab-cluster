@@ -1,5 +1,4 @@
-# Micro-Cluster Lab Using Docker, To Experiment With Spark & Dask on Yarn
-For more details about this project please refer to [my article](https://lemaizi.com/blog/creating-your-own-micro-cluster-lab-using-docker-to-experiment-with-spark-dask-on-yarn/) where I explain the motivations and how to recreate it by yourself.
+# Pyspak Lab Cluster Using Docker, To Experiment With PySpark on Yarn
 
 ### Project Folder Tree
 
@@ -16,44 +15,28 @@ For more details about this project please refer to [my article](https://lemaizi
 │   ├── spark-defaults.conf
 │   └── yarn-site.xml
 ├── datasets
-│   ├── alice_in_wonderland.txt
-│   └── iris.csv
-├── notebooks
-│   ├── Bash-Interface.ipynb
-│   ├── Dask-Yarn.ipynb
-│   ├── Python-Spark.ipynb
-│   └── Scala-Spark.ipynb
+│   └── retail-data
+├── pyspark
+│   └── count_glass.py
 └── script_files
     └── bootstrap.sh
 ```
 
 
 
-### Create the base container image
+### Build and Run the cluster
 
 ```bash
-docker build . -t cluster-base
-```
-
-### Run the cluster or micro-lab
-
-```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 ### Yarn resource manager UI
 
-Access the Yarn resource manager UI using the following link : http://localhost:8088/cluster/nodes
+Access the Yarn resource manager UI using the following link : http://<your-ip>:8088/cluster/nodes
 
 ![yarn ui](img/yarn_rm_ui.png)
 
-### Jupyter Notebook with starters notebooks
-
-Access Jupyter Notebook using this link : http://localhost:8888/
-
-<img src="img/docker_jupyter.png" alt="jupyter" style="zoom:50%;" />
-
-### Stopping the micro-lab
+### Stopping the cluster
 
 ```
 docker-compose down
